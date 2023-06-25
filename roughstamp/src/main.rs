@@ -68,7 +68,7 @@ enum Command {
         stamp_file: PathBuf,
 
         /// Server key
-        key: Option<String>,
+        pub_key: Option<String>,
     },
     /// Verify a timestamp
     Verify {
@@ -105,9 +105,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     dbg!(&cli);
 
     match cli.command {
-        Command::Stamp { digest, server, key, stamp_file } => {
-            let pub_key = None; // FIXME
-
+        Command::Stamp { digest, server, pub_key, stamp_file } => {
             let digest = hex_digest_to_digest64(&digest)?;
 
             let addr = dbg!(server.to_socket_addrs()?.next().unwrap());
@@ -137,7 +135,13 @@ fn main() -> Result<(), Box<dyn error::Error>> {
     }
 }
 
-fn verify_timestamp(raw: &[u8], pub_key: Option<Vec<u8>>, digest: Vec<u8>) -> Result<(), Box<dyn error::Error>> {
+fn verify_timestamp(raw: &[u8], pub_key: Option<String>, digest: Vec<u8>) -> Result<(), Box<dyn error::Error>> {
+    let pub_key = pub_key.map(|pkey| {
+        HEX.decode(pkey.as_ref())
+           .or_else(|_| BASE64.decode(pkey.as_ref()))
+           .expect("Error parsing public key!")
+    });
+
     let resp = RtMessage::from_bytes(raw).unwrap();
 
     let stamp::ParsedResponse {
