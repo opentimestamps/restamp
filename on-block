@@ -4,17 +4,17 @@ cd -- "$( dirname -- "${BASH_SOURCE[0]}" )"
 
 DATE=`date +%Y/%m/%d/`
 
+echo "creating roughtime/$DATE/$1"
 mkdir -p roughtime/$DATE/$1
 
-roughstamp/target/debug/roughstamp stamp $1 roughtime.cloudflare.com:2003 roughtime/$DATE/$1/roughtime.cloudflare.com "0GD7c3yP8xEc4Zl2zeuN2SlLvDVVocjsPSL8/Rl/7zg=" &
-# roughstamp/target/debug/roughstamp stamp $1 roughtime.cloudflare.com:2002 roughtime/$DATE/$1/roughtime.cloudflare.com "gD63hSj3ScS+wuOeGrubXlq35N1c5Lby/S+T7MNTjxo=" &
-roughstamp/target/debug/roughstamp stamp $1 roughtime.int08h.com:2002 roughtime/$DATE/$1/roughtime.int08h.com "AW5uAoTSTDfG5NfY1bTh08GUnOqlRb+HVhbJ3ODJvsE=" &
+roughstamp/target/debug/roughstamp stamp $1 roughtime.cloudflare.com:2003 roughtime/$DATE/$1/roughtime.cloudflare.com "0GD7c3yP8xEc4Zl2zeuN2SlLvDVVocjsPSL8/Rl/7zg=" 2>&1 &
+roughstamp/target/debug/roughstamp stamp $1 roughtime.int08h.com:2002 roughtime/$DATE/$1/roughtime.int08h.com "AW5uAoTSTDfG5NfY1bTh08GUnOqlRb+HVhbJ3ODJvsE=" 2>&1 &
 
-roughstamp/target/debug/roughstamp stamp $1 time.txryan.com:2002 roughtime/$DATE/$1/time.txryan.com "iBVjxg/1j7y1+kQUTBYdTabxCppesU/07D4PMDJk2WA=" &
-roughstamp/target/debug/roughstamp stamp $1 time-pdx.txryan.com:2002 roughtime/$DATE/$1/time-pdx.txryan.com "iBVjxg/1j7y1+kQUTBYdTabxCppesU/07D4PMDJk2WA=" &
+roughstamp/target/debug/roughstamp stamp $1 time.txryan.com:2002 roughtime/$DATE/$1/time.txryan.com "iBVjxg/1j7y1+kQUTBYdTabxCppesU/07D4PMDJk2WA=" 2>&1 &
+roughstamp/target/debug/roughstamp stamp $1 time-pdx.txryan.com:2002 roughtime/$DATE/$1/time-pdx.txryan.com "iBVjxg/1j7y1+kQUTBYdTabxCppesU/07D4PMDJk2WA=" 2>&1 &
 
 # My private Roughtime server connected to a GPS receiver
-roughstamp/target/debug/roughstamp stamp $1 [fd0d:200f:2790::5]:2002 roughtime/$DATE/$1/gps-petertodd f99b629ec99d1fb89caaf73393c45995611e6c0222e80513896342cdd4c11cab
+roughstamp/target/debug/roughstamp stamp $1 [fd0d:200f:2790::5]:2002 roughtime/$DATE/$1/gps-petertodd f99b629ec99d1fb89caaf73393c45995611e6c0222e80513896342cdd4c11cab 2>&1
 
 sleep 10
 git add roughtime/
