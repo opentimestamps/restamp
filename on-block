@@ -11,7 +11,6 @@ roughstamp/target/debug/roughstamp stamp $1 roughtime.cloudflare.com:2003 rought
 roughstamp/target/debug/roughstamp stamp $1 roughtime.int08h.com:2002 roughtime/$DATE/$1/roughtime.int08h.com "AW5uAoTSTDfG5NfY1bTh08GUnOqlRb+HVhbJ3ODJvsE=" 2>&1 &
 
 roughstamp/target/debug/roughstamp stamp $1 time.txryan.com:2002 roughtime/$DATE/$1/time.txryan.com "iBVjxg/1j7y1+kQUTBYdTabxCppesU/07D4PMDJk2WA=" 2>&1 &
-roughstamp/target/debug/roughstamp stamp $1 time-pdx.txryan.com:2002 roughtime/$DATE/$1/time-pdx.txryan.com "iBVjxg/1j7y1+kQUTBYdTabxCppesU/07D4PMDJk2WA=" 2>&1 &
 
 # My private Roughtime server connected to a GPS receiver
 roughstamp/target/debug/roughstamp stamp $1 [fd0d:200f:2790::5]:2002 roughtime/$DATE/$1/gps-petertodd f99b629ec99d1fb89caaf73393c45995611e6c0222e80513896342cdd4c11cab 2>&1
